@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    background: repeating-radial-gradient(
+        circle at top, 
+        #152A4A 0%,      /* Inner: Lighter blue-gray spot */
+        #0A1931 15%,     /* Middle: Fades to darkest blue */
+        #0A1931 30%      /* Outer: Stops the ring, defining the repeat */
+    );
+    background-color: #0A1931; 
+    /* The size ensures the pattern is visible and not too small */
+    background-size: 150% 150%;
+}
+       
+       .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 15px 30px;
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: #555;
+}
+
+    body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: linear-gradient(135deg, #1a2a47 0%, #4a3e5c 100%); 
+            color: #ffffff; 
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
+            width: 100%;
+            max-width: 400px;
+            margin-top: 4%;
+            margin-left: 35%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffe6f2; 
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #dee2e6; 
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #778899; 
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.1); 
+            color: #ffffff; 
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #cccccc; 
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: #ff69b4; 
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #e05e9d; 
+            transform: translateY(-2px); 
+        }
+
+        .error-message {
+            color: #ffdddd; 
+            font-size: 0.85em;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .success-message {           
+            color: #90ee90; 
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <nav class="navbar">
+        <div class="logo">My Image Site</div>
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="./register.html">Contact</a></li>
+        </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h1>Register for Exciting and Wonderful Images</h1>
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Gmail Address:</label>
+                <input type="email" id="email" name="email" placeholder="user@gmail.com" required>
+                <small id="emailError" class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit">Register Now</button>
+        </form>
+        <p id="successMessage" class="success-message"></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const successMessage = document.getElementById('successMessage');
+
+            emailError.textContent = '';
+            successMessage.textContent = '';
+
+            let isValid = true;
+
+            const emailValue = emailInput.value.trim();
+            
+            const gmailPattern = /^[\w.-]+@gmail\.com$/i;
+
+            if (!gmailPattern.test(emailValue)) {
+                emailError.textContent = '❌ Please enter a valid Gmail address (e.g., user@gmail.com).';
+                emailInput.focus();
+                isValid = false;
+            }
+
+            if (isValid) {
+                successMessage.textContent = '✅ Registration successful! Welcome to the club.';
+                document.getElementById('registrationForm').reset();
+                
+                return false; 
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
